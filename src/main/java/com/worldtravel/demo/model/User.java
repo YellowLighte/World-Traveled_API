@@ -29,7 +29,7 @@ public class User {
     private UserProfile userProfile;
 
    @OneToMany(mappedBy = "user")
-    private  Set<Adventure> adventures;
+   private  Set<Adventure> adventures;
 
     public User() {
     }

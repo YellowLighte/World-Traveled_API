@@ -65,9 +65,6 @@ class UserControllerTest {
         return objectMapper.writeValueAsString(object);
     }
 
-    @Test
-    void setUserService() {
-    }
 
     @Test
     void createUserTest() throws Exception {
@@ -87,7 +84,6 @@ class UserControllerTest {
                .andExpect(status().isOk());
     }
 
-    //TODO finish test
     @Test
     void updatePassword() throws Exception{
         String response  = "update successful";
@@ -98,8 +94,4 @@ class UserControllerTest {
                 .andExpect(status().isOk());
     }
 
-    //TODO finish test
-    @Test
-    void updateEmail() {
-    }
 }

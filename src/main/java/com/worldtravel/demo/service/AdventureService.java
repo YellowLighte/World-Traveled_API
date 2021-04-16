@@ -60,13 +60,14 @@ public class AdventureService {
     public Adventure createAdventure(Adventure adventureObject) {
         System.out.println("service calling createAdventure =====>");
         MyUserDetails myUserDetails = (MyUserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        Optional<Country> country = Optional.ofNullable(countryRepository.findByName(adventureObject.getCountryName()));
+        Optional<Country> country = Optional.ofNullable(countryRepository.findByName(adventureObject.getCountryName().toLowerCase()));
 
         if (!country.isPresent()) {
             throw new InformationNotFoundException("Country with provided name " + adventureObject.getCountryName() + " is not found");
         }
         else{
             adventureObject.setUser(myUserDetails.getUser());
+            adventureObject.setCountryName(adventureObject.getCountryName().toLowerCase());
             adventureObject.setCountry(country.get());
             return adventureRepository.save(adventureObject);
         }
@@ -125,7 +126,7 @@ public class AdventureService {
         System.out.println("service calling updateAdventure =====>");
         MyUserDetails myUserDetails = (MyUserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         Adventure adventure = adventureRepository.findByUserIdAndId(myUserDetails.getUser().getId(), adventureId);
-        Optional<Country> country = Optional.ofNullable(countryRepository.findByName(adventureObject.getCountryName()));
+        Optional<Country> country = Optional.ofNullable(countryRepository.findByName(adventureObject.getCountryName().toLowerCase()));
         if(adventure == null){
             throw new InformationNotFoundException("No adventure with id " + adventureId + " found");
         }
@@ -137,7 +138,7 @@ public class AdventureService {
                 adventure.setDateWent(adventureObject.getDateWent());
                 adventure.setAdventureName(adventureObject.getAdventureName());
                 adventure.setCountry(country.get());
-                adventure.setCountryName(adventureObject.getCountryName());
+                adventure.setCountryName(adventureObject.getCountryName().toLowerCase());
                 adventure.setUser(myUserDetails.getUser());
                 adventure.setAdventureDescription(adventureObject.getAdventureDescription());
                 return adventureRepository.save(adventure);

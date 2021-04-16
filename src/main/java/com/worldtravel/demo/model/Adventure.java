@@ -25,12 +25,13 @@ public class Adventure {
     @Column
     private String countryName;
 
-
+    // Connection to the User model, allowing User:Country to act as Many:Many
     @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
 
+    // Connection to the Control model, allowing User:Country to act as Many:Many
     @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "country_id")
@@ -44,7 +45,7 @@ public class Adventure {
         this.adventureName = adventureName;
         this.dateWent = dateWent;
         this.adventureDescription = adventureDescription;
-        this.countryName = countryName;
+        this.countryName = countryName.toLowerCase();
     }
 
     public Long getId() {

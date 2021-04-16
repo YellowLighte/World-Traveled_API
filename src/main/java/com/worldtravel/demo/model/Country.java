@@ -19,6 +19,7 @@ public class Country {
     @Column
     private String name;
 
+    // Adventures are tied to Country
     @OneToMany(mappedBy = "country", orphanRemoval = true)
     @LazyCollection(LazyCollectionOption.FALSE)
     private List<Adventure> adventureList;
@@ -30,7 +31,7 @@ public class Country {
 
     public Country(Long id, String name) {
         this.id = id;
-        this.name = name;
+        this.name = name.toLowerCase();
     }
 
     public Long getId() {
