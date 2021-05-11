@@ -59,7 +59,7 @@ class UserProfileControllerTest {
     @BeforeEach
     public void setup() {
         user = new User(1L, "jenjanik", "jen@scuz.com", "123456");
-        userProfile = new UserProfile(1L, "Jen", "Janik", "Jen's profile"); // Test 1
+        userProfile = new UserProfile(1L, "Jen", "Janik", "Jen's profile");
         mockMvc = MockMvcBuilders.webAppContextSetup(webApplicationContext).build();
     }
 
